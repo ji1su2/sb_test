@@ -12,6 +12,7 @@ import com.web.demo.entity.SnsUser;
 import com.web.demo.exception.DataNotFoundException;
 import com.web.demo.repository.RefreshTokenRepository;
 
+//FIXME #REFACT: 일반 토큰 및 리프레시 토큰 관련 서비스 통합
 @Service
 public class TokenService {
 	@Autowired
@@ -24,7 +25,7 @@ public class TokenService {
 	private RefreshTokenRepository refreshTokenRepository;
 	
 	// 리프레시 토큰 => 엑세스 토큰
-    public String createNewAccessToken(String refreshToken) {
+    public String createNewAccessToken(String refreshToken, int hour) {
         // 리플레시 토큰 자체 유효성체크
         if(!tokenProvider.isValidToken(refreshToken)) {
             throw new IllegalArgumentException("Unexpected token");
@@ -38,7 +39,7 @@ public class TokenService {
         // 유저 아이디 => 사용자 획득
         SnsUser user = userService.findById(userId);
         // 사용자정보, 만료시간 => 엑세스 토큰
-        return tokenProvider.generateToken(user, Duration.ofHours(2));
+        return tokenProvider.generateToken(user, Duration.ofHours(hour));
     }    
     // 리플레시 토큰 => 리플레시 토큰 : 리프레시 토큰 유효성 체크
     public RefreshToken findByRefreshToken(String refreshToken) {

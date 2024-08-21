@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
-//FIXME #REFACT: 유틸리티
+//FIXME #REFACT: 유틸리티, 서비스 전반에 필요한 유틸리티, 중복기능등을 제공하는 서비스
 @Service
 public class UtilService {
 	public void setCookie(String key, String value, int expiration, HttpServletResponse response) {

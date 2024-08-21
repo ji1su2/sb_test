@@ -1,9 +1,5 @@
-/**
- * # 0819: 아무거나
- */
-
 package com.web.demo;
-
+// 1
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

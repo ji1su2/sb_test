@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.web.demo.TokenAuthenticationFilter;
 import com.web.demo.service.TokenProvider;
 import com.web.demo.service.TokenService;
 import com.web.demo.service.UtilService;
@@ -50,7 +51,10 @@ public class SecurityConfig {
 			.logout((logout) -> logout
 	                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
 	                .logoutSuccessUrl("/user/login")
-	                .invalidateHttpSession(true))			
+	                .invalidateHttpSession(true))	
+			// TODO #0819 : 필터 기능 추가(요청이 처리되기전에 작동하는 필터)
+			.addFilterBefore(new TokenAuthenticationFilter(tokenProvider), 
+					UsernamePasswordAuthenticationFilter.class);
 		
 		;
 		return http.build();

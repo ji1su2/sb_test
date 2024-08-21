@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +16,9 @@ import lombok.Setter;
 @Entity
 public class SnsUser {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_generator3")
+    @SequenceGenerator(name = "sequence_generator3", sequenceName = "sequence_name3", allocationSize = 1)
 	private Long id;
 	
 	@Column(unique = true)
